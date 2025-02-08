@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  tasksun-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"  # Maps port 9000 of the host to port 9000 of the container
+    volumes:
+      - .:/var/www
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+      - DB_CONNECTION=pgsql
+      - DB_HOST=taskun-database
+      - DB_PORT=5432
+      - DB_DATABASE=tasksun
+      - DB_USERNAME=user
+      - DB_PASSWORD=password
+    depends_on:
+      - taskun-database
+
+  taskun-database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: tasksun
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:latest  # Using the official Nginx image
+    ports:
+      - "80:80"  # Maps port 80 of the host to port 80 of the container
+    volumes:
+      - .:/usr/share/nginx/html  # Mounts the current directory in the container
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Mounts your Nginx configuration file
+
+volumes:
+  pgdata:
