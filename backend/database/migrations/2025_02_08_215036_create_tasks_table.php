@@ -9,23 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void{
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relacionamento com a tabela users
-            $table->string('title'); // Título da tarefa
-            $table->text('description')->nullable(); // Descrição da tarefa
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('description')->nullable();
             $table->enum('status', ['pendente', 'em progresso', 'concluída'])->default('pendente'); // Status da tarefa
-            $table->timestamps(); // Campos created_at e updated_at
+            $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void{
         Schema::dropIfExists('tasks');
     }
 };
