@@ -12,20 +12,22 @@ services:
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
       - DB_CONNECTION=pgsql
-      - DB_HOST=taskun-database
+      - DB_HOST=tasksun-database
       - DB_PORT=5432
       - DB_DATABASE=tasksun
       - DB_USERNAME=user
       - DB_PASSWORD=password
     depends_on:
-      - taskun-database
+      - tasksun-database
 
-  taskun-database:
+  tasksun-database:
     image: postgres:latest
     environment:
       POSTGRES_DB: tasksun
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
+    ports:
+        - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
