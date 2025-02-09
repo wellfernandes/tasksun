@@ -26,6 +26,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
 
+Route::middleware('auth:sanctum')->apiResource('users', UserController::class);
+
 Route::middleware('auth:sanctum')->get('/users/{user}', [UserController::class, 'show']);
 
 Route::middleware('auth:sanctum')->apiResource('tasks', TaskController::class);
