@@ -1,7 +1,7 @@
 # TaskSun
 ![tasksun](img/tasksun.png)
 
-**[README BACKEND]()**
+**[README BACKEND](backend/README.md)**
 
 **TaskSun** é um gerenciador de tarefas (task manager) que tem como objetivo ser simples e eficiente. Este projeto é dividido em duas partes: o backend e o frontend, que são desenvolvidos de forma desacoplada.
 
