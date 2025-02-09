@@ -1,5 +1,5 @@
 # TaskSun
-![tasksun](tasksun.png)
+![tasksun](img/tasksun.png)
 
 **[README BACKEND]()**
 
