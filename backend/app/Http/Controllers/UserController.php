@@ -14,4 +14,10 @@ class UserController extends Controller{
     public function show(User $user){
         return response()->json($user);
     }
+
+    public function destroy(User $user){
+        $user->delete();
+        return response()->noContent();
+    }
+
 }
