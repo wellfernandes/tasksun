@@ -6,13 +6,19 @@ export default defineNuxtConfig({
   // Adicione CSS do Vuetify
   css: [
     'vuetify/lib/styles/main.css',
-    '@mdi/font/css/materialdesignicons.css'
+    '@mdi/font/css/materialdesignicons.css',
+    '~/assets/styles/main.css'
   ],
   
   // Configurações de build
   build: {
     transpile: ['vuetify']
   },
+
+  // Adicione Pinia
+  modules: [
+    '@pinia/nuxt'
+  ],
   
   // Plugins
   plugins: [
