@@ -1,84 +1,75 @@
-  <template>
-    <div class="login-form">
-      <h2>Login</h2>
-      <form @submit.prevent="handleSubmit">
-        <div class="form-group">
-          <label for="username">Nome de Usuário</label>
-          <input
-            type="text"
-            id="username"
-            v-model="username"
-            required
-            placeholder="Digite seu nome de usuário"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Senha</label>
-          <input
-            type="password"
-            id="password"
-            v-model="password"
-            required
-            placeholder="Digite sua senha"
-          />
-        </div>
-        <button type="submit">Entrar</button>
-      </form>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  
-  const username = ref('');
-  const password = ref('');
-  
-  const handleSubmit = () => {
-    // Aqui você pode adicionar a lógica para autenticação
-    console.log('Nome de Usuário:', username.value);
-    console.log('Senha:', password.value);
-  };
-  </script>
-  
-  <style scoped>
-  .login-form {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+<!-- components/features/LoginForm.vue -->
+<template>
+  <v-card class="login-card" elevation="2">
+    <v-card-title class="text-h5">Login</v-card-title>
+    <v-card-text>
+      <v-form @submit.prevent="handleSubmit">
+        <v-text-field
+          v-model="username"
+          label="Email"
+          required
+          placeholder="Digite seu email de cadastro."
+        />
+        <v-text-field
+          v-model="password"
+          label="Senha"
+          type="password"
+          required
+          placeholder="Digite sua senha"
+        />
+        <v-btn type="submit" color="primary" class="mt-4">Entrar</v-btn>
+      </v-form>
+    </v-card-text>
+  </v-card>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+
+const username = ref('');
+const password = ref('');
+const authStore = useAuthStore();
+
+
+const handleSubmit = async () => {
+  try {
+    const response = await useNuxtApp().$axios.post('/login', {
+      email: username.value,
+      password: password.value,
+    });
+
+    console.log('Login bem-sucedido:', response.data);
+    authStore.login(response.data.user, response.data.token);
+    navigateTo('/dashboard')
+  } catch (error) {
+    console.error('Erro ao fazer login:', error);
   }
-  
-  .form-group {
-    margin-bottom: 15px;
+};
+
+onMounted(() => {
+  authStore.init();
+  if (authStore.isAuthenticated) {
+    navigateTo('/dashboard');
   }
-  
-  label {
-    display: block;
-    margin-bottom: 5px; /* Espaçamento abaixo do rótulo */
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  </style>
-  
+});
+
+</script>
+
+<style scoped>
+.login-card {
+  max-width: auto;
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+}
+</style>
+
+<style scoped>
+.login-card {
+  max-width: auto;
+  width: 50%; 
+  margin: 0 auto;
+  padding: 20px;
+}
+</style>
