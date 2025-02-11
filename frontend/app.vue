@@ -1,8 +1,17 @@
+<!-- app.vue -->
 <template>
   <div>
-    <NuxtPage />  
+    <NuxtPage />
   </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import { useAuthStore } from '~/stores/auth';
+
+const authStore = useAuthStore();
+
+onMounted(() => {
+  authStore.init();
+});
 </script>
