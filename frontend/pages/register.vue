@@ -1,3 +1,8 @@
 <template>
-    <div>Página de Cadastro</div>
+    <RegisterForm/>
 </template>
+
+<script setup lang="ts">
+import RegisterForm from '~/components/feature/RegisterForm.vue';
+
+</script>
