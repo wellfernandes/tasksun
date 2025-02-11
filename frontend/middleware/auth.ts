@@ -1,10 +1,10 @@
-import { useAuthStore } from '~/stores/auth'
-
-export default defineNuxtRouteMiddleware((to, from) => {
-  const authStore = useAuthStore()
-
-
-  if (!authStore.isAuthenticated) {
-    return navigateTo('/login')
+export default defineNuxtPlugin((nuxtApp) => {
+  const authStore = useAuthStore();
+  
+  if (import.meta.client) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      authStore.token = token;
+    }
   }
-})
+});
