@@ -64,12 +64,3 @@ onMounted(() => {
   padding: 20px;
 }
 </style>
-
-<style scoped>
-.login-card {
-  max-width: auto;
-  width: 50%; 
-  margin: 0 auto;
-  padding: 20px;
-}
-</style>
