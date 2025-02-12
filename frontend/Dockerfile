@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+CMD /bin/sh -c "rm -f /tmp/nitro/*.sock && npm run dev -- --host 0.0.0.0"
