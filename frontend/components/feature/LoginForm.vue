@@ -1,4 +1,3 @@
-<!-- components/features/LoginForm.vue -->
 <template>
   <v-card class="login-card" elevation="2">
     <v-card-title class="text-h5">Login</v-card-title>

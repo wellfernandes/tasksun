@@ -12,14 +12,20 @@ use Illuminate\Http\Request;
  * )
  * 
  * @OA\PathItem(
- *     path="/api/tasks",
+ *     path="/api/tasks/{userId}",
  *     @OA\Get(
- *         operationId="getTasks",
+ *         operationId="getTasksByUserId",
  *         tags={"Tasks"},
- *         summary="Listar todas as tarefas",
+ *         summary="Listar todas as tarefas de um usuário",
+ *         @OA\Parameter(
+ *             name="userId",
+ *             in="path",
+ *             required=true,
+ *             @OA\Schema(type="integer")
+ *         ),
  *         @OA\Response(
  *             response=200,
- *             description="Lista de tarefas",
+ *             description="Lista de tarefas do usuário",
  *             @OA\JsonContent(
  *                 type="array",
  *                 @OA\Items(
@@ -33,6 +39,10 @@ use Illuminate\Http\Request;
  *                     @OA\Property(property="updated_at", type="string", format="date-time")
  *                 )
  *             )
+ *         ),
+ *         @OA\Response(
+ *             response=404,
+ *             description="Usuário não encontrado"
  *         )
  *     ),
  *     @OA\Post(
@@ -77,9 +87,11 @@ use Illuminate\Http\Request;
  * )
  */
 class TaskController extends Controller{
-    public function index(){
-        return Task::all();
+    public function index($userId) {
+        $tasks = Task::where('user_id', $userId)->get();
+        return response()->json($tasks);
     }
+    
 
     public function store(Request $request){
         $request->validate([

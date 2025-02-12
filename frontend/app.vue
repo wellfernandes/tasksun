@@ -1,7 +1,6 @@
-<!-- app.vue -->
 <template>
   <div>
-    <NuxtPage />
+    <NuxtPage/>
   </div>
 </template>
 
