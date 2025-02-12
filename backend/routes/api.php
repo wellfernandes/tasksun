@@ -16,20 +16,20 @@ use App\Http\Controllers\UserController;
 |
 */
 
+// Rota para obter o usuário autenticado
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Rotas de autenticação
 Route::post('/register', [AuthController::class, 'register']);
-
 Route::post('/login', [AuthController::class, 'login']);
 
+// Rotas de usuários
 Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
-
 Route::middleware('auth:sanctum')->apiResource('users', UserController::class);
-
 Route::middleware('auth:sanctum')->get('/users/{user}', [UserController::class, 'show']);
 
+// Rotas de tarefas
 Route::middleware('auth:sanctum')->apiResource('tasks', TaskController::class);
-
-Route::middleware('auth:sanctum')->get('/tasks/{task}', [TaskController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/tasks/user/{userId}', [TaskController::class, 'index']);
