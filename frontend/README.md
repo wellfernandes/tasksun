@@ -1,75 +1,62 @@
-# Nuxt Minimal Starter
+# Tasksun Frontend
+## ⚙️ Como executar o projeto
+Siga os passos para executar o projeto tasksun frontend em sua máquina.
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+### Pré-requisitos
+- É necessário ter o **Docker** instalado.
 
-## Setup
+### Instruções de Instalação
+Primeiramente, faça o clone do repositório **'tasksun'** localmente em sua máquina:
 
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+git https://github.com/wellfernandes/tasksun.git
 ```
+Abra a pasta do projeto utilizando a sua IDE.
 
-## Production
+### Frontend
+Com o backend em execução, vamos agora iniciar o frontend.
 
-Build the application for production:
+1. Vá para a pasta frontend. Se estiver na raiz do projeto, execute o comando:
+    ```
+    cd frontend/
+    ```
+2. Em seguida, execute o comando para iniciar o container Docker:
+    ```
+    docker compose up -d
+    ```
+    **OBSERVAÇÃO:** Em caso de erro, execute o comando para fazer o build sem utilizar o cache:
+        
+    ```
+    docker compose build --no-cache
+    ```
+    Aguarde a finalização do build e em seguida execute o comando:
+        
+    ```
+    docker compose up -d
+    ```
+Excelente! Agora você o frontend está em execução e você já pode acessar o **TaskSun - Gerenciador de Tarefas**.
 
-```bash
-# npm
-npm run build
+## Dados de Login
+- Por padrão a url de acesso é: http://localhost:3000
 
-# pnpm
-pnpm build
+    - Email: admin@tasksun.com.br
+    - Senha: @Tasksun123
+    
+- Para cadastrar um novo usuário acesse: http://localhost:3000/register
 
-# yarn
-yarn build
+## 📄 Documentação 
+### Usando Swagger Docs
+Para acessar o swagger, que permite testar todas as rotas da aplicação, acesse:
 
-# bun
-bun run build
-```
+Swagger - http://localhost/api/v1/docs
 
-Locally preview production build:
+1. Após acessar faça o login, para que seja gerado o token de autenticação.
 
-```bash
-# npm
-npm run preview
+2. Com o token copiado, faça a autenticação clicando no botão superior direito **Authorize**. Basta inserir o token (sem a necessidade de inserir a palavra Bearer antes) e clicar em **Authorize** e **Close**.
 
-# pnpm
-pnpm preview
+3. Neste momento você deve já estar autenticado, o que possibilita testar qualquer rota da aplicação.
+- **Auth:** Operações relacionadas à autenticação.
+- **Tasks:** Operações relacionados a tarefas.
+- **Users:** Operações relacionadas a usuários.
 
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Ao selecionar uma das opções serão exibidas todas as rotas da categoria.
