@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default defineNuxtPlugin((nuxtApp) => {
   const apiClient = axios.create({
-    baseURL: 'http://localhost/api',
+    baseURL: 'http://localhost/api/v1',
     timeout: 10000,
     headers: {
       'Content-Type': 'application/json',

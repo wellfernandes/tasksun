@@ -12,20 +12,15 @@ use Illuminate\Http\Request;
  * )
  * 
  * @OA\PathItem(
- *     path="/api/tasks/{userId}",
+ *     path="/tasks",
  *     @OA\Get(
- *         operationId="getTasksByUserId",
+ *         operationId="getAllTasks",
  *         tags={"Tasks"},
- *         summary="Listar todas as tarefas de um usuário",
- *         @OA\Parameter(
- *             name="userId",
- *             in="path",
- *             required=true,
- *             @OA\Schema(type="integer")
- *         ),
+ *         summary="Listar todas as tarefas",
+ *         security={{"bearerAuth": {}}},
  *         @OA\Response(
  *             response=200,
- *             description="Lista de tarefas do usuário",
+ *             description="Lista de todas as tarefas",
  *             @OA\JsonContent(
  *                 type="array",
  *                 @OA\Items(
@@ -39,16 +34,13 @@ use Illuminate\Http\Request;
  *                     @OA\Property(property="updated_at", type="string", format="date-time")
  *                 )
  *             )
- *         ),
- *         @OA\Response(
- *             response=404,
- *             description="Usuário não encontrado"
  *         )
  *     ),
  *     @OA\Post(
  *         operationId="createTask",
  *         tags={"Tasks"},
  *         summary="Criar uma nova tarefa",
+ *         security={{"bearerAuth": {}}},
  *         @OA\RequestBody(
  *             required=true,
  *             @OA\JsonContent(
@@ -85,13 +77,54 @@ use Illuminate\Http\Request;
  *         )
  *     )
  * )
+ * 
+ * @OA\PathItem(
+ *     path="/tasks/user/{userId}",
+ *     @OA\Get(
+ *         operationId="getTasksByUserId",
+ *         tags={"Tasks"},
+ *         summary="Listar todas as tarefas de um usuário",
+ *         security={{"bearerAuth": {}}},
+ *         @OA\Parameter(
+ *             name="userId",
+ *             in="path",
+ *             required=true,
+ *             @OA\Schema(type="integer")
+ *         ),
+ *         @OA\Response(
+ *             response=200,
+ *             description="Lista de tarefas do usuário",
+ *             @OA\JsonContent(
+ *                 type="array",
+ *                 @OA\Items(
+ *                     type="object",
+ *                     @OA\Property(property="id", type="integer"),
+ *                     @OA\Property(property="title", type="string"),
+ *                     @OA\Property(property="description", type="string", nullable=true),
+ *                     @OA\Property(property="status", type="string"),
+ *                     @OA\Property(property="user_id", type="integer"),
+ *                     @OA\Property(property="created_at", type="string", format="date-time"),
+ *                     @OA\Property(property="updated_at", type="string", format="date-time")
+ *                 )
+ *             )
+ *         ),
+ *         @OA\Response(
+ *             response=404,
+ *             description="Usuário não encontrado"
+ *         )
+ *     )
+ * )
  */
 class TaskController extends Controller{
-    public function index($userId) {
+    public function index(){
+        $tasks = Task::all();
+        return response()->json($tasks);
+    }
+
+    public function getUserTasks($userId){
         $tasks = Task::where('user_id', $userId)->get();
         return response()->json($tasks);
     }
-    
 
     public function store(Request $request){
         $request->validate([
@@ -107,11 +140,12 @@ class TaskController extends Controller{
 
     /**
      * @OA\PathItem(
-     *     path="/api/tasks/{id}",
+     *     path="/tasks/{id}",
      *     @OA\Get(
      *         operationId="getTaskById",
      *         tags={"Tasks"},
      *         summary="Obter uma tarefa por ID",
+     *         security={{"bearerAuth": {}}},
      *         @OA\Parameter(
      *             name="id",
      *             in="path",
@@ -141,6 +175,7 @@ class TaskController extends Controller{
      *         operationId="updateTask",
      *         tags={"Tasks"},
      *         summary="Atualizar uma tarefa",
+     *         security={{"bearerAuth": {}}},
      *         @OA\Parameter(
      *             name="id",
      *             in="path",
@@ -185,6 +220,7 @@ class TaskController extends Controller{
      *         operationId="deleteTask",
      *         tags={"Tasks"},
      *         summary="Deletar uma tarefa",
+     *         security={{"bearerAuth": {}}},
      *         @OA\Parameter(
      *             name="id",
      *             in="path",

@@ -30,5 +30,5 @@ export default defineNuxtConfig({
     define: {
       'process.env.DEBUG': false,
     },
-  }
+  },
 })

@@ -16,20 +16,24 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// Rota para obter o usuário autenticado
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    // Rotas de autenticação
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+
+    // Rotas protegidas por autenticação
+    Route::middleware('auth:sanctum')->group(function () {
+        // Rota para obter o usuário autenticado
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+
+        // Rotas de usuários
+        Route::apiResource('users', UserController::class);
+
+        // Rotas de tarefas
+        Route::get('/tasks', [TaskController::class, 'index']);
+        Route::get('/tasks/user/{userId}', [TaskController::class, 'getUserTasks']);
+        Route::apiResource('tasks', TaskController::class)->except(['index']);
+    });
 });
-
-// Rotas de autenticação
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-
-// Rotas de usuários
-Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
-Route::middleware('auth:sanctum')->apiResource('users', UserController::class);
-Route::middleware('auth:sanctum')->get('/users/{user}', [UserController::class, 'show']);
-
-// Rotas de tarefas
-Route::middleware('auth:sanctum')->apiResource('tasks', TaskController::class);
-Route::middleware('auth:sanctum')->get('/tasks/user/{userId}', [TaskController::class, 'index']);
