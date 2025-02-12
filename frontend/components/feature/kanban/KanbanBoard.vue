@@ -9,6 +9,7 @@
           color="blue-lighten-4"
           @add-task="openNewTaskDialog"
           @move-task="moveTask"
+          @delete-task="deleteTask"
         />
         
         <KanbanColumn
@@ -17,6 +18,7 @@
           status="em progresso"
           color="orange-lighten-4"
           @move-task="moveTask"
+          @delete-task="deleteTask"
         />
         
         <KanbanColumn
@@ -24,6 +26,7 @@
           :tasks="completedTasks"
           status="concluída"
           color="green-lighten-4"
+          @delete-task="deleteTask"
         />
       </v-col>
     </v-row>
@@ -156,6 +159,22 @@ const getArrayByStatus = (status) => {
     case 'em progresso': return progressTasks.value;
     case 'concluída': return completedTasks.value;
     default: return [];
+  }
+};
+
+const deleteTask = async (task) => {
+  try {
+    await $taskService.deleteTask(task.id);
+
+    const taskList = getArrayByStatus(task.status);
+    const index = taskList.findIndex(t => t.id === task.id);
+    if (index !== -1) {
+      taskList.splice(index, 1);
+    }
+
+    emitUpdatedTasks();
+  } catch (error) {
+    console.error('Erro ao excluir tarefa:', error);
   }
 };
 

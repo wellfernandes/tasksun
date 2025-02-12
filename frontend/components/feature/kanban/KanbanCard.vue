@@ -16,6 +16,15 @@
         Mover
     </v-btn>
     </v-card-actions>
+
+    <v-card-actions>
+    <v-btn 
+        color="primary" 
+        @click="deleteTask"
+    >
+        Excluir
+    </v-btn>
+    </v-card-actions>
 </v-card>
 </template>
 
@@ -31,7 +40,7 @@ status: {
 }
 })
 
-const emit = defineEmits(['move-task'])
+const emit = defineEmits(['move-task', 'delete-task'])
 const moveToNextStatus = () => {
 
 let nextStatus = '';
@@ -48,6 +57,10 @@ switch(props.status) {
 }
 
 emit('move-task', props.task);
+}
+
+const deleteTask = () => {
+  emit('delete-task', props.task);
 }
 </script>
 
