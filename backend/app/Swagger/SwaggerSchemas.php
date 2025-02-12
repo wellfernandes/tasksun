@@ -9,8 +9,7 @@ namespace App\Swagger;
  *     description="API para gerenciamento de tarefas",
  *     @OA\Contact(
  *         name="Welliton Fernandes Leal",
- *         email="contato@tasksun.com.br",
- *         url="https://www.tasksun.com.br"
+ *         url="https://www.linkedin.com/in/wellitonfernandes/"
  *     ),
  *     @OA\License(
  *         name="MIT License",
