@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller{
     /**
      * @OA\Post(
-     *     path="/api/register",
+     *     path="/register",
      *     operationId="registerUser",
      *     tags={"Auth"},
      *     summary="Registrar novo usuário",
@@ -68,7 +68,7 @@ class AuthController extends Controller{
 
     /**
      * @OA\Post(
-     *     path="/api/login",
+     *     path="/login",
      *     operationId="loginUser",
      *     tags={"Auth"},
      *     summary="Login de usuário",
