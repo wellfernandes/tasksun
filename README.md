@@ -1,10 +1,16 @@
 # TaskSun
 ![tasksun](img/tasksun.png)
 
-**[README BACKEND](backend/README.md)**
-**[README FRONTEND](frontend/README.md)**
+- **[README BACKEND](backend/README.md)**
+
+- **[README FRONTEND](frontend/README.md)**
 
 **TaskSun** é um gerenciador de tarefas (task manager) que tem como objetivo ser simples e eficiente. Este projeto é dividido em duas partes: o backend e o frontend, que são desenvolvidos de forma desacoplada.
+
+## Kanban de Tarefas
+Antes de iniciar a implementação do projeto foram criados todos os cards (tasks) para implementação de cada funcionalidade.
+
+- [Acessar Tarefas no taiga](https://tree.taiga.io/project/wellfernandes-tasksun/kanban)
 
 ## 📂 Estrutura do Projeto
 O repositório está organizado da seguinte forma:
