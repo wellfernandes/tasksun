@@ -5,8 +5,7 @@
         "description": "API para gerenciamento de tarefas",
         "contact": {
             "name": "Welliton Fernandes Leal",
-            "url": "https://www.tasksun.com.br",
-            "email": "contato@tasksun.com.br"
+            "url": "https://www.linkedin.com/in/wellitonfernandes/"
         },
         "license": {
             "name": "MIT License",
@@ -21,26 +20,16 @@
         }
     ],
     "paths": {
-        "/api/tasks/{userId}": {
+        "/tasks": {
             "get": {
                 "tags": [
                     "Tasks"
                 ],
-                "summary": "Listar todas as tarefas de um usuário",
-                "operationId": "getTasksByUserId",
-                "parameters": [
-                    {
-                        "name": "userId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+                "summary": "Listar todas as tarefas",
+                "operationId": "getAllTasks",
                 "responses": {
                     "200": {
-                        "description": "Lista de tarefas do usuário",
+                        "description": "Lista de todas as tarefas",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -77,11 +66,13 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Usuário não encontrado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -168,10 +159,83 @@
                     "400": {
                         "description": "Erro de validação"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/tasks/{id}": {
+        "/tasks/user/{userId}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Listar todas as tarefas de um usuário",
+                "operationId": "getTasksByUserId",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de tarefas do usuário",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/tasks/{id}": {
             "get": {
                 "tags": [
                     "Tasks"
@@ -228,7 +292,12 @@
                     "404": {
                         "description": "Tarefa não encontrada"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -320,7 +389,12 @@
                     "404": {
                         "description": "Tarefa não encontrada"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -345,10 +419,15 @@
                     "404": {
                         "description": "Tarefa não encontrada"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/users": {
+        "/users": {
             "get": {
                 "tags": [
                     "Users"
@@ -388,7 +467,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -466,10 +550,15 @@
                     "400": {
                         "description": "Erro de validação"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/users/{id}": {
+        "/users/{id}": {
             "get": {
                 "tags": [
                     "Users"
@@ -519,7 +608,12 @@
                     "404": {
                         "description": "Usuário não encontrado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -591,7 +685,12 @@
                     "404": {
                         "description": "Usuário não encontrado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -616,10 +715,15 @@
                     "404": {
                         "description": "Usuário não encontrado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/register": {
+        "/register": {
             "post": {
                 "tags": [
                     "Auth"
@@ -700,7 +804,7 @@
                 }
             }
         },
-        "/api/login": {
+        "/login": {
             "post": {
                 "tags": [
                     "Auth"
