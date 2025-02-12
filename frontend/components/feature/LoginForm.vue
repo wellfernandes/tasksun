@@ -20,16 +20,24 @@
       </v-form>
     </v-card-text>
   </v-card>
+
+  <LoginError
+    :visible="loginError"
+    :message="errorMessage"
+    @update:visible="loginError = $event"
+  />
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import LoginError from '@/components/common/LoginError.vue';
 
 const username = ref('');
 const password = ref('');
 const authStore = useAuthStore();
-
+const loginError = ref(false);
+const errorMessage = ref('');
 
 const handleSubmit = async () => {
   try {
@@ -43,6 +51,8 @@ const handleSubmit = async () => {
     navigateTo('/dashboard')
   } catch (error) {
     console.error('Erro ao fazer login:', error);
+    errorMessage.value = 'Erro ao fazer login. Por favor, verifique suas credenciais.';
+    loginError.value = true;
   }
 };
 
