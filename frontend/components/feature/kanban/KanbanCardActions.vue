@@ -16,6 +16,13 @@
     >
         Concluir
     </v-btn>
+
+    <v-btn 
+        color="error" 
+        @click="$emit('delete-task', task)"
+      >
+        Excluir
+    </v-btn>
     </template>
 </v-card-actions>
 </template>
@@ -32,5 +39,5 @@ status: {
 }
 })
 
-const emit = defineEmits(['move-task'])
+const emit = defineEmits(['move-task', 'delete-task'])
 </script>

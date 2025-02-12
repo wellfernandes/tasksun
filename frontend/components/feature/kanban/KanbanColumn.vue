@@ -12,6 +12,7 @@
           :task="task"
           :status="status"
           @move-task="(task) => $emit('move-task', task, status)"
+          @delete-task="$emit('delete-task', $event)"
         />
       </v-list>
     </v-card-text>
@@ -50,7 +51,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['add-task', 'move-task']);
+const emit = defineEmits(['add-task', 'move-task', 'delete-task']);
 </script>
 
 <style scoped>
