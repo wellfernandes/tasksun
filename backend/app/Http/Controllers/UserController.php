@@ -14,11 +14,12 @@ use Illuminate\Http\Request;
 class UserController extends Controller{
    /**
      * @OA\PathItem(
-     *     path="/api/users",
+     *     path="/users",
      *     @OA\Get(
      *         operationId="getUsers",
      *         tags={"Users"},
      *         summary="Listar todos os usuários",
+     *         security={{"bearerAuth": {}}},
      *         @OA\Response(
      *             response=200,
      *             description="Lista de usuários",
@@ -39,6 +40,7 @@ class UserController extends Controller{
      *         operationId="createUser",
      *         tags={"Users"},
      *         summary="Criar um novo usuário",
+     *         security={{"bearerAuth": {}}},
      *         @OA\RequestBody(
      *             required=true,
      *             @OA\JsonContent(
@@ -75,11 +77,12 @@ class UserController extends Controller{
 
     /**
      * @OA\PathItem(
-     *     path="/api/users/{id}",
+     *     path="/users/{id}",
      *     @OA\Get(
      *         operationId="getUserById",
      *         tags={"Users"},
      *         summary="Obter um usuário por ID",
+     *         security={{"bearerAuth": {}}},
      *         @OA\Parameter(
      *             name="id",
      *             in="path",
@@ -107,6 +110,7 @@ class UserController extends Controller{
      *         operationId="deleteUser",
      *         tags={"Users"},
      *         summary="Deletar um usuário",
+     *         security={{"bearerAuth": {}}},
      *         @OA\Parameter(
      *             name="id",
      *             in="path",
@@ -146,10 +150,11 @@ class UserController extends Controller{
 
     /**
      * @OA\Put(
-     *     path="/api/users/{id}",
+     *     path="/users/{id}",
      *     operationId="updateUser",
      *     tags={"Users"},
      *     summary="Atualizar um usuário",
+     *     security={{"bearerAuth": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
