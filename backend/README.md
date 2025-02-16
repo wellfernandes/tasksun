@@ -9,7 +9,7 @@ Siga os passos para executar o projeto tasksun backend em sua máquina.
 Primeiramente, faça o clone do repositório **'tasksun'** localmente em sua máquina:
 
 ```
-git https://github.com/wellfernandes/tasksun.git
+git clone https://github.com/wellfernandes/tasksun.git
 ```
 Abra a pasta do projeto utilizando a sua IDE.
 
