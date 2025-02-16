@@ -10,7 +10,7 @@
 ## Kanban de Tarefas
 Antes de iniciar a implementação do projeto foram criados todos os cards (tasks) para implementação de cada funcionalidade.
 
-- [Acessar Tarefas no taiga](https://tree.taiga.io/project/wellfernandes-tasksun/kanban)
+- [Acessar Tarefas no Taiga](https://tree.taiga.io/project/wellfernandes-tasksun/kanban)
 
 ## 📂 Estrutura do Projeto
 O repositório está organizado da seguinte forma:
@@ -54,7 +54,7 @@ Siga os passos para executar o projeto completo em sua máquina.
 Primeiramente, faça o clone do repositório **'tasksun'** localmente em sua máquina:
 
 ```
-git https://github.com/wellfernandes/tasksun.git
+git clone https://github.com/wellfernandes/tasksun.git
 ```
 Abra a pasta do projeto utilizando a sua IDE.
 
